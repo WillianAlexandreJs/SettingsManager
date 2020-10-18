@@ -35,15 +35,16 @@
             this.lblExtension = new System.Windows.Forms.Label();
             this.txtApplicationName = new System.Windows.Forms.TextBox();
             this.lblApplicationName = new System.Windows.Forms.Label();
-            this.dgvProperties = new System.Windows.Forms.DataGridView();
+            this.dgvSettings = new System.Windows.Forms.DataGridView();
+            this.btnClasses = new System.Windows.Forms.Button();
+            this.btnInserts = new System.Windows.Forms.Button();
             this.Instance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReferenceType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnClasses = new System.Windows.Forms.Button();
-            this.btnInserts = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPathConfigFiles
@@ -61,6 +62,7 @@
             this.txtPathConfigFile.Name = "txtPathConfigFile";
             this.txtPathConfigFile.Size = new System.Drawing.Size(353, 22);
             this.txtPathConfigFile.TabIndex = 1;
+            this.txtPathConfigFile.Text = "C:\\Lixo\\FilesConfig\\Nd.Notification";
             // 
             // btnReadFiles
             // 
@@ -74,6 +76,8 @@
             // 
             // cbExtension
             // 
+            this.cbExtension.DisplayMember = "*.config";
+            this.cbExtension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbExtension.FormattingEnabled = true;
             this.cbExtension.Items.AddRange(new object[] {
             "*.config",
@@ -84,6 +88,7 @@
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(140, 24);
             this.cbExtension.TabIndex = 4;
+            this.cbExtension.SelectedIndex = 0;
             // 
             // lblExtension
             // 
@@ -100,6 +105,7 @@
             this.txtApplicationName.Name = "txtApplicationName";
             this.txtApplicationName.Size = new System.Drawing.Size(353, 22);
             this.txtApplicationName.TabIndex = 7;
+            this.txtApplicationName.Text = "Nd.Notification";
             // 
             // lblApplicationName
             // 
@@ -110,66 +116,29 @@
             this.lblApplicationName.TabIndex = 6;
             this.lblApplicationName.Text = "ApplicationName:";
             // 
-            // dgvProperties
+            // dgvSettings
             // 
-            this.dgvProperties.AllowUserToAddRows = false;
-            this.dgvProperties.AllowUserToDeleteRows = false;
-            this.dgvProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvSettings.AllowUserToAddRows = false;
+            this.dgvSettings.AllowUserToDeleteRows = false;
+            this.dgvSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProperties.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Instance,
+            this.ReferenceType,
             this.Reference,
             this.Property,
             this.Type,
             this.Value});
-            this.dgvProperties.Location = new System.Drawing.Point(12, 176);
-            this.dgvProperties.Name = "dgvProperties";
-            this.dgvProperties.RowHeadersWidth = 51;
-            this.dgvProperties.RowTemplate.Height = 24;
-            this.dgvProperties.Size = new System.Drawing.Size(820, 276);
-            this.dgvProperties.TabIndex = 8;
-            // 
-            // Instance
-            // 
-            this.Instance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Instance.HeaderText = "Instance";
-            this.Instance.MinimumWidth = 6;
-            this.Instance.Name = "Instance";
-            this.Instance.Width = 90;
-            // 
-            // Reference
-            // 
-            this.Reference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Reference.HeaderText = "Reference";
-            this.Reference.MinimumWidth = 6;
-            this.Reference.Name = "Reference";
-            this.Reference.Width = 103;
-            // 
-            // Property
-            // 
-            this.Property.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Property.HeaderText = "Property";
-            this.Property.MinimumWidth = 6;
-            this.Property.Name = "Property";
-            this.Property.Width = 91;
-            // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Type.HeaderText = "Type";
-            this.Type.MinimumWidth = 6;
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            this.Type.Width = 69;
-            // 
-            // Value
-            // 
-            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Value.HeaderText = "Value";
-            this.Value.MinimumWidth = 6;
-            this.Value.Name = "Value";
+            this.dgvSettings.Location = new System.Drawing.Point(12, 176);
+            this.dgvSettings.Name = "dgvSettings";
+            this.dgvSettings.RowHeadersWidth = 51;
+            this.dgvSettings.RowTemplate.Height = 24;
+            this.dgvSettings.Size = new System.Drawing.Size(820, 276);
+            this.dgvSettings.TabIndex = 8;
+            this.dgvSettings.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSettings_CellEndEdit);
+            this.dgvSettings.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvSettings_CurrentCellDirtyStateChanged);
             // 
             // btnClasses
             // 
@@ -193,6 +162,60 @@
             this.btnInserts.UseVisualStyleBackColor = true;
             this.btnInserts.Click += new System.EventHandler(this.btnInserts_Click);
             // 
+            // Instance
+            // 
+            this.Instance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Instance.HeaderText = "Instance";
+            this.Instance.MinimumWidth = 6;
+            this.Instance.Name = "Instance";
+            this.Instance.ReadOnly = true;
+            this.Instance.Width = 90;
+            // 
+            // ReferenceType
+            // 
+            this.ReferenceType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ReferenceType.HeaderText = "ReferenceType";
+            this.ReferenceType.MinimumWidth = 6;
+            this.ReferenceType.Name = "ReferenceType";
+            this.ReferenceType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ReferenceType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ReferenceType.Width = 135;
+            // 
+            // Reference
+            // 
+            this.Reference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Reference.HeaderText = "Reference";
+            this.Reference.MinimumWidth = 6;
+            this.Reference.Name = "Reference";
+            this.Reference.ReadOnly = true;
+            this.Reference.Width = 103;
+            // 
+            // Property
+            // 
+            this.Property.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Property.HeaderText = "Property";
+            this.Property.MinimumWidth = 6;
+            this.Property.Name = "Property";
+            this.Property.ReadOnly = true;
+            this.Property.Width = 91;
+            // 
+            // Type
+            // 
+            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Type.HeaderText = "Type";
+            this.Type.MinimumWidth = 6;
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            this.Type.Width = 69;
+            // 
+            // Value
+            // 
+            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Value.HeaderText = "Value";
+            this.Value.MinimumWidth = 6;
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            // 
             // frmCreateConfigArtefacts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -200,7 +223,7 @@
             this.ClientSize = new System.Drawing.Size(855, 516);
             this.Controls.Add(this.btnInserts);
             this.Controls.Add(this.btnClasses);
-            this.Controls.Add(this.dgvProperties);
+            this.Controls.Add(this.dgvSettings);
             this.Controls.Add(this.txtApplicationName);
             this.Controls.Add(this.lblApplicationName);
             this.Controls.Add(this.lblExtension);
@@ -210,7 +233,7 @@
             this.Controls.Add(this.lblPathConfigFiles);
             this.Name = "frmCreateConfigArtefacts";
             this.Text = "Create Config Artefacts";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,10 +248,11 @@
         private System.Windows.Forms.Label lblExtension;
         private System.Windows.Forms.TextBox txtApplicationName;
         private System.Windows.Forms.Label lblApplicationName;
-        private System.Windows.Forms.DataGridView dgvProperties;
+        private System.Windows.Forms.DataGridView dgvSettings;
         private System.Windows.Forms.Button btnClasses;
         private System.Windows.Forms.Button btnInserts;
         private System.Windows.Forms.DataGridViewTextBoxColumn Instance;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ReferenceType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reference;
         private System.Windows.Forms.DataGridViewTextBoxColumn Property;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
