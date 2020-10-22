@@ -1,10 +1,8 @@
 ﻿using Corporate.Plataforms.Settings.Manager.Datas.Interfaces;
-using Corporate.Plataforms.Settings.Manager.Models;
 using Corporate.Plataforms.Settings.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
 
 namespace Corporate.Plataforms.Settings.Manager.Controllers
 {
@@ -13,9 +11,9 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
     public class SettingsHubController : Controller
     {
         private readonly IHubContext<SettingsHubClient> _settingsHubContext;
-        private readonly ISettingsData _settingsData;
+        private readonly ISettingsDataRepository _settingsData;
 
-        public SettingsHubController(IHubContext<SettingsHubClient> settingsHubContext, ISettingsData settingsData)
+        public SettingsHubController(IHubContext<SettingsHubClient> settingsHubContext, ISettingsDataRepository settingsData)
         {
             _settingsHubContext = settingsHubContext;
             _settingsData = settingsData;
@@ -33,7 +31,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
             string retMessage;
             try
             {
-                _settingsHubContext.Clients.All.SendAsync("UpdateGeneralPropertyValue", propertyValue);
+                _settingsHubContext.Clients.All.SendAsync("UpdateInstanceSettings", propertyValue);
                 retMessage = "Success";
             }
             catch (Exception e)
@@ -50,7 +48,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
             string retMessage;
             try
             {
-                _settingsHubContext.Clients.Group(applicationName).SendAsync("UpdateApplicationPropertyValue", propertyValue);
+                _settingsHubContext.Clients.Group(applicationName).SendAsync("UpdateInstanceSettings", propertyValue);
                 retMessage = "Success";
             }
             catch (Exception e)
@@ -67,7 +65,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
             string retMessage;
             try
             {
-                _settingsHubContext.Clients.User(instanceId).SendAsync("UpdateInstancePropertyValue", propertyValue);
+                _settingsHubContext.Clients.User(instanceId).SendAsync("UpdateInstanceSettings", propertyValue);
                 retMessage = "Success";
             }
             catch (Exception e)

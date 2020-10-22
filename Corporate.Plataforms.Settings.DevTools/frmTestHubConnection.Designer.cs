@@ -109,7 +109,7 @@
             this.btnStartHub.TabIndex = 6;
             this.btnStartHub.Text = "StartHub";
             this.btnStartHub.UseVisualStyleBackColor = true;
-            this.btnStartHub.Click += new System.EventHandler(this.btnStartHub_Click);
+            this.btnStartHub.Click += new System.EventHandler(this.BtnStartHub_Click);
             // 
             // btnStopHub
             // 

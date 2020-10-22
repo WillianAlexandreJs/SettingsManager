@@ -12,10 +12,10 @@ namespace Corporate.Plataforms.Settings.DevTools
     public class SettingsFileTool
     {
 
-        private string _applicationName;
+        private readonly string _applicationName;
         private string _folderPath;
-        Dictionary<string, XmlDocument> _configFiles = new Dictionary<string, XmlDocument>();
-        List<PropertyData> lstPropertyData = new List<PropertyData>();
+        readonly Dictionary<string, XmlDocument> _configFiles = new Dictionary<string, XmlDocument>();
+        readonly List<PropertyData> lstPropertyData = new List<PropertyData>();
 
         public SettingsFileTool(string applicationName, string folderPath, string extension)
         {

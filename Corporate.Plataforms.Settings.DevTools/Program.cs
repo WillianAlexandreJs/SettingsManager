@@ -16,7 +16,7 @@ namespace Corporate.Plataforms.Settings.DevTools
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDevTools());
+            Application.Run(new FrmDevTools());
         }
     }
 }

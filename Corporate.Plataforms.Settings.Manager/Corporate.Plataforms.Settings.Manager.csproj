@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
@@ -24,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\gitHubWill\English_Version\AspNetCoreDistributedCacheTools\AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\gitHubWill\English_Version\AspNetCoreEntityFrameworkProcedureTools\AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj" />
     <ProjectReference Include="..\Corporate.Plataforms.Settings.Model\Corporate.Plataforms.Settings.Model.csproj" />
   </ItemGroup>
 

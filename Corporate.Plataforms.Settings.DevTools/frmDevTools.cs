@@ -10,24 +10,28 @@ using System.Windows.Forms;
 
 namespace Corporate.Plataforms.Settings.DevTools
 {
-    public partial class frmDevTools : Form
+    public partial class FrmDevTools : Form
     {
-        public frmDevTools()
+        public FrmDevTools()
         {
             InitializeComponent();
         }
 
-        private void hubTestToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HubTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmTestHubConnection frmTestHubConnection = new frmTestHubConnection();
-            frmTestHubConnection.MdiParent = this;
+            frmTestHubConnection frmTestHubConnection = new frmTestHubConnection
+            {
+                MdiParent = this
+            };
             frmTestHubConnection.Show();
         }
 
-        private void createAtfactsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreateAtfactsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmCreateConfigArtefacts frmCreateConfigArtefacts = new frmCreateConfigArtefacts();
-            frmCreateConfigArtefacts.MdiParent = this;
+            FrmCreateConfigArtefacts frmCreateConfigArtefacts = new FrmCreateConfigArtefacts
+            {
+                MdiParent = this
+            };
             frmCreateConfigArtefacts.Show();
         }
     }

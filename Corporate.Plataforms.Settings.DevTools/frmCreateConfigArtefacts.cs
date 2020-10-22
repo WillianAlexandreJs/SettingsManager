@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Corporate.Plataforms.Settings.DevTools
 {
-    public partial class frmCreateConfigArtefacts : Form
+    public partial class FrmCreateConfigArtefacts : Form
     {
-        public frmCreateConfigArtefacts()
+        public FrmCreateConfigArtefacts()
         {
             InitializeComponent();
             InicializeDataGridSettings();
@@ -28,7 +28,7 @@ namespace Corporate.Plataforms.Settings.DevTools
 
         SettingsFileTool settingsFileTool;
 
-        private void btnReadFiles_Click(object sender, EventArgs e)
+        private void BtnReadFiles_Click(object sender, EventArgs e)
         {
             settingsFileTool = new SettingsFileTool(txtApplicationName.Text, txtPathConfigFile.Text, cbExtension.SelectedItem.ToString());
 
@@ -49,12 +49,12 @@ namespace Corporate.Plataforms.Settings.DevTools
 
         }
 
-        private void btnClasses_Click(object sender, EventArgs e)
+        private void BtnClasses_Click(object sender, EventArgs e)
         {
             settingsFileTool.CreateClassesFiles();
         }
 
-        private void btnInserts_Click(object sender, EventArgs e)
+        private void BtnInserts_Click(object sender, EventArgs e)
         {
             settingsFileTool.CreateInsertCommands();
         }
@@ -74,7 +74,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             }
         }
 
-        private void dgvSettings_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        private void DgvSettings_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgvSettings.IsCurrentCellDirty)
             {
@@ -83,7 +83,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             }
         }
 
-        private void dgvSettings_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void DgvSettings_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewCell cell = ((DataGridView)sender).CurrentCell;
 

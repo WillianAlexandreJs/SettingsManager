@@ -1,6 +1,6 @@
 ﻿namespace Corporate.Plataforms.Settings.DevTools
 {
-    partial class frmCreateConfigArtefacts
+    partial class FrmCreateConfigArtefacts
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.btnReadFiles.TabIndex = 3;
             this.btnReadFiles.Text = "Read Files";
             this.btnReadFiles.UseVisualStyleBackColor = true;
-            this.btnReadFiles.Click += new System.EventHandler(this.btnReadFiles_Click);
+            this.btnReadFiles.Click += new System.EventHandler(this.BtnReadFiles_Click);
             // 
             // cbExtension
             // 
@@ -137,8 +137,8 @@
             this.dgvSettings.RowTemplate.Height = 24;
             this.dgvSettings.Size = new System.Drawing.Size(820, 276);
             this.dgvSettings.TabIndex = 8;
-            this.dgvSettings.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSettings_CellEndEdit);
-            this.dgvSettings.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvSettings_CurrentCellDirtyStateChanged);
+            this.dgvSettings.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSettings_CellEndEdit);
+            this.dgvSettings.CurrentCellDirtyStateChanged += new System.EventHandler(this.DgvSettings_CurrentCellDirtyStateChanged);
             // 
             // btnClasses
             // 
@@ -149,7 +149,7 @@
             this.btnClasses.TabIndex = 9;
             this.btnClasses.Text = "Create Classes";
             this.btnClasses.UseVisualStyleBackColor = true;
-            this.btnClasses.Click += new System.EventHandler(this.btnClasses_Click);
+            this.btnClasses.Click += new System.EventHandler(this.BtnClasses_Click);
             // 
             // btnInserts
             // 
@@ -160,7 +160,7 @@
             this.btnInserts.TabIndex = 10;
             this.btnInserts.Text = "Create Inserts";
             this.btnInserts.UseVisualStyleBackColor = true;
-            this.btnInserts.Click += new System.EventHandler(this.btnInserts_Click);
+            this.btnInserts.Click += new System.EventHandler(this.BtnInserts_Click);
             // 
             // Instance
             // 

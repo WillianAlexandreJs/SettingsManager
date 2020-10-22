@@ -15,7 +15,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             InitializeComponent();
         }
 
-        private void btnStartHub_Click(object sender, EventArgs e)
+        private void BtnStartHub_Click(object sender, EventArgs e)
         {
             for (int i = 1; i <= txtInstancesNumber.Value; i++)
             {

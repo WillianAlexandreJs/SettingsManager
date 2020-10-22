@@ -1,5 +1,8 @@
+using AspNetCore.DistributedCache.Tools;
+using AutoMapper;
 using Corporate.Plataforms.Settings.Manager.Datas;
 using Corporate.Plataforms.Settings.Manager.Datas.Interfaces;
+using Corporate.Plataforms.Settings.Manager.Mappers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +18,9 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Corporate.Plataforms.Settings.Manager.Business;
+using Corporate.Plataforms.Settings.Manager.Business.Interfaces;
 
 namespace Corporate.Plataforms.Settings.Manager
 {
@@ -43,13 +49,22 @@ namespace Corporate.Plataforms.Settings.Manager
             });
 
             //SignalR with Redis
-            services.AddSignalR();
+            //services.AddSignalR();
 
             //SignalR with Redis
-            //services.AddSignalR().AddStackExchangeRedis("localhost");
+            services.AddSignalR().AddStackExchangeRedis("localhost");
+
+            services.AddDbContext<SettingsDataContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SettingsDataDB"));
+            });
+
 
             services.AddSingleton<IUserIdProvider, ApplicationIdProvider>();
-            services.AddSingleton<ISettingsData, SettingsData>();
+            services.AddSingleton<ISettingsManagerBusiness, SettingsManagerBusiness>();
+            services.AddScoped<ISettingsDataRepository, SettingsDataRepository>();
+
+            services.ConfigureDistributedCacheRepository(Configuration);
 
             var audienceConfig = Configuration.GetSection("TokenConfigurations");
 
@@ -87,7 +102,12 @@ namespace Corporate.Plataforms.Settings.Manager
                     }
                 };
             });
+            
 
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<PropertyDataMapper>();
+            });
 
             services.AddSwaggerGen(c =>
             {

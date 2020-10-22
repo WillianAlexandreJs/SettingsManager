@@ -1,6 +1,6 @@
 ﻿namespace Corporate.Plataforms.Settings.DevTools
 {
-    partial class frmDevTools
+    partial class FrmDevTools
     {
         /// <summary>
         /// Required designer variable.
@@ -51,14 +51,14 @@
             this.hubTestToolStripMenuItem.Name = "hubTestToolStripMenuItem";
             this.hubTestToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.hubTestToolStripMenuItem.Text = "Hub Test";
-            this.hubTestToolStripMenuItem.Click += new System.EventHandler(this.hubTestToolStripMenuItem_Click);
+            this.hubTestToolStripMenuItem.Click += new System.EventHandler(this.HubTestToolStripMenuItem_Click);
             // 
             // createAtfactsToolStripMenuItem
             // 
             this.createAtfactsToolStripMenuItem.Name = "createAtfactsToolStripMenuItem";
             this.createAtfactsToolStripMenuItem.Size = new System.Drawing.Size(119, 24);
             this.createAtfactsToolStripMenuItem.Text = "Create artfacts";
-            this.createAtfactsToolStripMenuItem.Click += new System.EventHandler(this.createAtfactsToolStripMenuItem_Click);
+            this.createAtfactsToolStripMenuItem.Click += new System.EventHandler(this.CreateAtfactsToolStripMenuItem_Click);
             // 
             // frmDevTools
             // 
