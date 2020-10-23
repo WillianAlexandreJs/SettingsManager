@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corporate.Plataforms.Settin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corporate.Plataforms.Settings.Model", "Corporate.Plataforms.Settings.Model\Corporate.Plataforms.Settings.Model.csproj", "{17184BC4-45F3-4FE8-8FCE-D4979B63AAE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.Client", "Corporate.Plataforms.Settings.Client\Corporate.Plataforms.Settings.Client.csproj", "{15425629-925A-45A5-9CCC-46861F56CD5A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.DevTools", "Corporate.Plataforms.Settings.DevTools\Corporate.Plataforms.Settings.DevTools.csproj", "{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.DistributedCache.Tools", "..\..\..\..\..\gitHubWill\English_Version\AspNetCoreDistributedCacheTools\AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj", "{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.EntityFramework.Procedure.Tools", "..\..\..\..\..\gitHubWill\English_Version\AspNetCoreEntityFrameworkProcedureTools\AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj", "{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.ConsoleTest", "Corporate.Plataforms.Settings.ConsoleTest\Corporate.Plataforms.Settings.ConsoleTest.csproj", "{09A689FA-D052-4913-BAB9-99AFFAF47426}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{17184BC4-45F3-4FE8-8FCE-D4979B63AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17184BC4-45F3-4FE8-8FCE-D4979B63AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17184BC4-45F3-4FE8-8FCE-D4979B63AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15425629-925A-45A5-9CCC-46861F56CD5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15425629-925A-45A5-9CCC-46861F56CD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

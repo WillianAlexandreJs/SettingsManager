@@ -15,16 +15,15 @@ namespace Corporate.Plataforms.Settings.Manager
     {
         private readonly ISettingsManagerBusiness _settingsManagerBusiness;
 
-        public SettingsHubClient(ISettingsManagerBusiness settingsManagerBusiness)
+        public SettingsHubClient()
         {
-            _settingsManagerBusiness = settingsManagerBusiness;
+            
         }
 
         public override async Task OnConnectedAsync()
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, Context.User.Identity.Name);
             await base.OnConnectedAsync();
-            await _settingsManagerBusiness.SendInstanceSettings(Context.User.Identity.Name);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)

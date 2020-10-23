@@ -42,7 +42,7 @@ namespace Corporate.Plataforms.Settings.Manager.Datas
         {
             var propertyIdParameter = new SqlParameter("@PROPERTY_ID", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-            return _context.GetTransactionCommandResult.FromSql("UPDATE_INSTANCE_PROPERTY_VALUE",
+            return _context.GetTransactionCommandResult.FromSqlRaw("UPDATE_INSTANCE_PROPERTY_VALUE",
                         new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = instanceName },
                         new SqlParameter("@PROPERTY_NAME", SqlDbType.VarChar) { Value = propertyData.PropertyName },
                         new SqlParameter("@SETTING_REFERENCE", SqlDbType.VarChar) { Value = propertyData.SettingReference },

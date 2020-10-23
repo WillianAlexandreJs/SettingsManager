@@ -15,7 +15,7 @@ namespace Corporate.Plataforms.Settings.Client
     {
         #region Properties
 
-        private readonly T _configuration;
+        public T _configuration { get; private set; }
         protected HubConnection _hubConnection;
         protected LoggerManager loggerManager;
 
@@ -85,7 +85,7 @@ namespace Corporate.Plataforms.Settings.Client
                             _hubConnection.On("Reconnecting", HubConnection_Reconnecting);
                             _hubConnection.On("Reconnected", HubConnection_Reconnected);
                             _hubConnection.KeepAliveInterval = keepAliveInterval;
-                            _hubConnection.On<PropertyValue>("UpdateApplicationConfiguration", actionUpdateSettingApplication);
+                            _hubConnection.On<PropertyValue>("UpdateInstanceSettings", actionUpdateSettingApplication);
 
                         }
                     })

@@ -169,6 +169,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Resources\RunTest.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Corporate.Plataforms.Settings.Model\Corporate.Plataforms.Settings.Model.csproj">

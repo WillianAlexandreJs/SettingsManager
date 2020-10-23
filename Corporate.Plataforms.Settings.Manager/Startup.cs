@@ -49,10 +49,10 @@ namespace Corporate.Plataforms.Settings.Manager
             });
 
             //SignalR with Redis
-            //services.AddSignalR();
+            services.AddSignalR();
 
             //SignalR with Redis
-            services.AddSignalR().AddStackExchangeRedis("localhost");
+            //services.AddSignalR().AddStackExchangeRedis("localhost");
 
             services.AddDbContext<SettingsDataContext>(options =>
             {
@@ -61,7 +61,7 @@ namespace Corporate.Plataforms.Settings.Manager
 
 
             services.AddSingleton<IUserIdProvider, ApplicationIdProvider>();
-            services.AddSingleton<ISettingsManagerBusiness, SettingsManagerBusiness>();
+            services.AddScoped<ISettingsManagerBusiness, SettingsManagerBusiness>();
             services.AddScoped<ISettingsDataRepository, SettingsDataRepository>();
 
             services.ConfigureDistributedCacheRepository(Configuration);
