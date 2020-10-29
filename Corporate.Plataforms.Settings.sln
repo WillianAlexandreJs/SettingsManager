@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.Client", "Corporate.Plataforms.Settings.Client\Corporate.Plataforms.Settings.Client.csproj", "{15425629-925A-45A5-9CCC-46861F56CD5A}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Corporate.Plataforms.Settings.Database", "Corporate.Plataforms.Settings.Database\Corporate.Plataforms.Settings.Database.sqlproj", "{FBBC3759-E589-4B4A-98B5-5BC59E77D113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,12 @@ Global
 		{15425629-925A-45A5-9CCC-46861F56CD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBBC3759-E589-4B4A-98B5-5BC59E77D113}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
