@@ -7,7 +7,6 @@ namespace Corporate.Plataforms.Settings.Manager.Entities
     public class PropertyDataEntity : IEntity
     {
         
-
         /// <summary>
         /// Property Name
         /// </summary>
@@ -32,7 +31,6 @@ namespace Corporate.Plataforms.Settings.Manager.Entities
         /// </summary>
         [Column("PROPERTY_VALUE")]
         public string PropertyValue { get; set; }
-
 
         /// <summary>
         /// Instance Name

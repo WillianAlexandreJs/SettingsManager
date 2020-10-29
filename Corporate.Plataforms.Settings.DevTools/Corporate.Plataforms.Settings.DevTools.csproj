@@ -110,6 +110,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Corporate.Plataforms.Settings.Client\Corporate.Plataforms.Settings.Client.csproj">
+      <Project>{15425629-925A-45A5-9CCC-46861F56CD5A}</Project>
+      <Name>Corporate.Plataforms.Settings.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Corporate.Plataforms.Settings.Model\Corporate.Plataforms.Settings.Model.csproj">
       <Project>{17184bc4-45f3-4fe8-8fce-d4979b63aae8}</Project>
       <Name>Corporate.Plataforms.Settings.Model</Name>

@@ -19,8 +19,8 @@ namespace ConsoleApp1
             }
         }
 
-        public string FirstStringProperty { get; set; }
-        public string SecondStringProperty { get; set; }
+        public string CpuUsageCritical { get; set; }
+        public string KeepAliveInterval { get; set; }
         public int FirstIntProperty { get; set; }
         public int SecondIntProperty { get; set; }
     }

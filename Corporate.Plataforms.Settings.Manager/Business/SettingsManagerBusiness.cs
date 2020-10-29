@@ -47,12 +47,11 @@ namespace Corporate.Plataforms.Settings.Manager.Business
 
         public async Task SendInstanceSettings(string instanceName)
         {
-            List<PropertyData> properties = GetCacheIsNullRaizeSync<List<PropertyData>, List<PropertyDataEntity>>(
-                                                instanceName, 
-                                                () => _settingsData.GetInstancePropertiesData(instanceName)
+            List<PropertyData> properties = GetCacheIsNullRaizeSync<List<PropertyData>, List<PropertyDataEntity>>(instanceName, 
+                                                                    () => _settingsData.GetInstancePropertiesData(instanceName)
                                             );
 
-            await _settingsHubContext.Clients.User(instanceName).SendAsync("GetInstanceSettings", properties);
+            await _settingsHubContext.Clients.User(instanceName).SendAsync("GetInstanceSettings", _mapper.Map<List<PropertyValue>>(properties));
         }
 
         private T GetCacheIsNullRaizeSync<T, TEntity>(string instanceName, Func<TEntity> actionGetDados)

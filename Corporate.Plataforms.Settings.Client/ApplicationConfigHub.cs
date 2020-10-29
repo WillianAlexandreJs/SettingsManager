@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Corporate.Plataforms.Settings.Client
 {
-    public class ApplicationConfigHub<T>
+    public class ApplicationConfigHub<T> where T : class
     {
         #region Properties
 
@@ -85,6 +87,7 @@ namespace Corporate.Plataforms.Settings.Client
                             _hubConnection.On("Reconnecting", HubConnection_Reconnecting);
                             _hubConnection.On("Reconnected", HubConnection_Reconnected);
                             _hubConnection.KeepAliveInterval = keepAliveInterval;
+                            _hubConnection.On<List<PropertyValue>>("GetInstanceSettings", InitSettingApplication);
                             _hubConnection.On<PropertyValue>("UpdateInstanceSettings", actionUpdateSettingApplication);
 
                         }
@@ -149,16 +152,25 @@ namespace Corporate.Plataforms.Settings.Client
         {
             try
             {
-                PropertyInfo propertyInfo = _configuration.GetType().GetProperty(itemConfig.Nome);
+                PropertyInfo propertyInfo = _configuration.GetType().GetProperty(itemConfig.Name);
                 if (propertyInfo != null)
-                    propertyInfo.SetValue(_configuration, Convert.ChangeType(itemConfig.Valor, propertyInfo.PropertyType), null);
+                    propertyInfo.SetValue(_configuration, Convert.ChangeType(itemConfig.Value, propertyInfo.PropertyType), null);
                 else
-                    Console.WriteLine($"Propriedade {itemConfig.Nome} não encontrada");
+                    Console.WriteLine($"Propriedade {itemConfig.Name} não encontrada");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+
+        public void InitSettingApplication(List<PropertyValue> settings)
+        {
+            foreach (var propertySetting in settings)
+                UpdateSettingApplication(propertySetting);
+
+            Console.WriteLine($"Configuration Class {JsonConvert.SerializeObject(_configuration)}");
         }
 
         #endregion

@@ -107,6 +107,7 @@ namespace Corporate.Plataforms.Settings.Manager
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<PropertyDataMapper>();
+                cfg.AddProfile<PropertyValueMapper>();
             });
 
             services.AddSwaggerGen(c =>

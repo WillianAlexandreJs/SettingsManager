@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Corporate.Plataforms.Settings.Client")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Corporate.Plataforms.Settings.Client")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Corporate.Plataforms.Settings.Client")]
 [assembly: AssemblyProduct("Corporate.Plataforms.Settings.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

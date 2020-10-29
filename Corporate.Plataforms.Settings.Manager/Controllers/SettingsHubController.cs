@@ -3,6 +3,7 @@ using Corporate.Plataforms.Settings.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Threading.Tasks;
 
 namespace Corporate.Plataforms.Settings.Manager.Controllers
 {
@@ -11,69 +12,32 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
     public class SettingsHubController : Controller
     {
         private readonly IHubContext<SettingsHubClient> _settingsHubContext;
-        private readonly ISettingsDataRepository _settingsData;
 
-        public SettingsHubController(IHubContext<SettingsHubClient> settingsHubContext, ISettingsDataRepository settingsData)
+        public SettingsHubController(IHubContext<SettingsHubClient> settingsHubContext)
         {
             _settingsHubContext = settingsHubContext;
-            _settingsData = settingsData;
-            LoadDictonary();
-        }
-
-        private void LoadDictonary()
-        {
-
         }
 
         [HttpPost]
-        public string UpdateGeneralPropertyValue([FromBody] PropertyValue propertyValue)
+        public async Task<IActionResult> UpdateGeneralPropertyValue([FromBody] PropertyValue propertyValue)
         {
-            string retMessage;
-            try
-            {
-                _settingsHubContext.Clients.All.SendAsync("UpdateInstanceSettings", propertyValue);
-                retMessage = "Success";
-            }
-            catch (Exception e)
-            {
-                retMessage = e.ToString();
-            }
-
-            return retMessage;
+            await _settingsHubContext.Clients.All.SendAsync("UpdateInstanceSettings", propertyValue);
+            return Ok();
         }
 
         [HttpPost]
-        public string UpdateApplicationPropertyValue([FromQuery] string applicationName, [FromBody] PropertyValue propertyValue)
+        public async Task<IActionResult> UpdateApplicationPropertyValue([FromQuery] string applicationName, [FromBody] PropertyValue propertyValue)
         {
-            string retMessage;
-            try
-            {
-                _settingsHubContext.Clients.Group(applicationName).SendAsync("UpdateInstanceSettings", propertyValue);
-                retMessage = "Success";
-            }
-            catch (Exception e)
-            {
-                retMessage = e.ToString();
-            }
 
-            return retMessage;
+            await _settingsHubContext.Clients.Group(applicationName).SendAsync("UpdateInstanceSettings", propertyValue);
+            return Ok();
         }
 
         [HttpPost]
-        public string UpdateInstancePropertyValue([FromQuery] string instanceId, [FromBody] PropertyValue propertyValue)
+        public async Task<IActionResult> UpdateInstancePropertyValue([FromQuery] string instanceId, [FromBody] PropertyValue propertyValue)
         {
-            string retMessage;
-            try
-            {
-                _settingsHubContext.Clients.User(instanceId).SendAsync("UpdateInstanceSettings", propertyValue);
-                retMessage = "Success";
-            }
-            catch (Exception e)
-            {
-                retMessage = e.ToString();
-            }
-
-            return retMessage;
+            await _settingsHubContext.Clients.User(instanceId).SendAsync("UpdateInstanceSettings", propertyValue);
+            return Ok();
         }
     }
 
