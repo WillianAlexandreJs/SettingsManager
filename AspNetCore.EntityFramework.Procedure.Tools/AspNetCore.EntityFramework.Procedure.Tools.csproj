@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Willian Alexandre Silva</Authors>
+    <Company>Willian Alexandre Silva</Company>
+    <PackageProjectUrl>https://github.com/WillianAlexandreJs/AspNetCoreUtilitariosEntityFramework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/WillianAlexandreJs/AspNetCoreUtilitariosEntityFramework</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
+    <Description>Pacote para utilização em Web APIs e Console Application AspNetCore, esta biblioteca está pré-configurada para realizar transações de Busca de dados e executar comandos DML com o EntityFramework</Description>
+    <Product>AspNetCore Utilitarios EntityFramework</Product>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.6" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

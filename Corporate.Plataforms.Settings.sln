@@ -9,11 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corporate.Plataforms.Settin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.DevTools", "Corporate.Plataforms.Settings.DevTools\Corporate.Plataforms.Settings.DevTools.csproj", "{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.DistributedCache.Tools", "..\..\..\..\..\gitHubWill\English_Version\AspNetCoreDistributedCacheTools\AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj", "{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.DistributedCache.Tools", "AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj", "{1231802E-9AF2-4246-AC75-6F4F1AD52B04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.EntityFramework.Procedure.Tools", "..\..\..\..\..\gitHubWill\English_Version\AspNetCoreEntityFrameworkProcedureTools\AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj", "{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.EntityFramework.Procedure.Tools", "AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj", "{B9EAAA89-F696-40AA-B9DB-03E003646EFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.ConsoleTest", "Corporate.Plataforms.Settings.ConsoleTest\Corporate.Plataforms.Settings.ConsoleTest.csproj", "{09A689FA-D052-4913-BAB9-99AFFAF47426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.Settings.Client", "Corporate.Plataforms.Settings.Client\Corporate.Plataforms.Settings.Client.csproj", "{15425629-925A-45A5-9CCC-46861F56CD5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.AzureConfiguration.Client", "Corporate.Plataforms.AzureConfiguration.Client\Corporate.Plataforms.AzureConfiguration.Client.csproj", "{EE173DF3-9804-4E09-9ED2-1D10718431E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corporate.Plataforms.AzureConfiguration.ConsoleTest", "Corporate.Plataforms.AzureConfiguration.ConsoleTest\Corporate.Plataforms.AzureConfiguration.ConsoleTest.csproj", "{95E613D4-76C5-4D5F-9352-58F3D244EFF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +39,30 @@ Global
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D97B1302-9D90-43B4-A25A-A64CEBD80A6C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AA527E8-3FE3-4CCD-A15E-06F1D9A43C57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F6E0F43-DDDE-4B7D-A755-52E2919AF8A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1231802E-9AF2-4246-AC75-6F4F1AD52B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1231802E-9AF2-4246-AC75-6F4F1AD52B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1231802E-9AF2-4246-AC75-6F4F1AD52B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1231802E-9AF2-4246-AC75-6F4F1AD52B04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9EAAA89-F696-40AA-B9DB-03E003646EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9EAAA89-F696-40AA-B9DB-03E003646EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9EAAA89-F696-40AA-B9DB-03E003646EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9EAAA89-F696-40AA-B9DB-03E003646EFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09A689FA-D052-4913-BAB9-99AFFAF47426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15425629-925A-45A5-9CCC-46861F56CD5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15425629-925A-45A5-9CCC-46861F56CD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15425629-925A-45A5-9CCC-46861F56CD5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE173DF3-9804-4E09-9ED2-1D10718431E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE173DF3-9804-4E09-9ED2-1D10718431E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE173DF3-9804-4E09-9ED2-1D10718431E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE173DF3-9804-4E09-9ED2-1D10718431E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95E613D4-76C5-4D5F-9352-58F3D244EFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95E613D4-76C5-4D5F-9352-58F3D244EFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95E613D4-76C5-4D5F-9352-58F3D244EFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95E613D4-76C5-4D5F-9352-58F3D244EFF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\gitHubWill\English_Version\AspNetCoreDistributedCacheTools\AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj" />
-    <ProjectReference Include="..\..\..\..\..\..\gitHubWill\English_Version\AspNetCoreEntityFrameworkProcedureTools\AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj" />
+    <ProjectReference Include="..\AspNetCore.DistributedCache.Tools\AspNetCore.DistributedCache.Tools.csproj" />
+    <ProjectReference Include="..\AspNetCore.EntityFramework.Procedure.Tools\AspNetCore.EntityFramework.Procedure.Tools.csproj" />
     <ProjectReference Include="..\Corporate.Plataforms.Settings.Model\Corporate.Plataforms.Settings.Model.csproj" />
   </ItemGroup>
 
