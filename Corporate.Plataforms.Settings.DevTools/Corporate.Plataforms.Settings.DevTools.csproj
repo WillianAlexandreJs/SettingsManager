@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ApplicationInfo.cs" />
     <Compile Include="DevToolsSettingsTestClass.cs" />
+    <Compile Include="SettingManager.cs" />
     <Compile Include="SettingsFileTool.cs" />
     <Compile Include="frmCreateConfigArtefacts.cs">
       <SubType>Form</SubType>

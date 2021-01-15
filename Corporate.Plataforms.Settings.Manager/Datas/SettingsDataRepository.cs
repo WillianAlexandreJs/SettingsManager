@@ -29,13 +29,13 @@ namespace Corporate.Plataforms.Settings.Manager.Datas
         public List<PropertyDataEntity> ListPropertiesData()
         {
             return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES @INSTANCE_NAME",
-    new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = DBNull.Value }).ToList();
+                    new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = DBNull.Value }).ToList();
         }
 
         public List<PropertyDataEntity> GetInstancePropertiesData(string instanceName)
         {
-           return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES @INSTANCE_NAME",
-                new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = instanceName }).ToList();
+            return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES @INSTANCE_NAME",
+                 new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = instanceName }).ToList();
         }
 
         public TransactionCommandResult UpdateInstancePropertyData(string instanceName, PropertyDataUpdate propertyData)

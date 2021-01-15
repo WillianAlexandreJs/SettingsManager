@@ -1,10 +1,6 @@
-﻿using Corporate.Plataforms.Settings.Client;
-using Newtonsoft.Json;
-using System;
-using System.Configuration;
-using System.Reflection;
+﻿using System;
 
-namespace ConsoleApp1
+namespace Corporate.Plataforms.Settings.ConsoleTest
 {
     class Program
     {
@@ -19,10 +15,7 @@ namespace ConsoleApp1
 
             Console.WriteLine($"Application: {args[0]}   Instance: {args[1]}");
 
-
-            //ApplicationConfigHub<ApplicationSettings> applicationConfigHub = new ApplicationConfigHub<ApplicationSettings>(ApplicationSettings.Instance);
-            //applicationConfigHub.StartHubConnection(ConfigurationManager.AppSettings.Get("UrlSettingsManagerSignaR"), "SettingsHub", args[0], args[1], new TimeSpan(0, 0, 5));
-
+            SettingManager.Instance.StartConnectionSettingsManager(args[0], args[1]);
             Console.ReadLine();
 
         }

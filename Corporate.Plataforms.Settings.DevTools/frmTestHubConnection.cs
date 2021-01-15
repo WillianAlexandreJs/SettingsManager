@@ -26,21 +26,8 @@ namespace Corporate.Plataforms.Settings.DevTools
 
         private void StartHub(string instanceId)
         {
-            //DevToolsSettingsTestClass settingsTestClass = new DevToolsSettingsTestClass();
-            //ApplicationConfigHub<DevToolsSettingsTestClass> applicationConfigHub = new ApplicationConfigHub<DevToolsSettingsTestClass>(settingsTestClass);
-            //applicationConfigHub.StartHubConnection(txtUrlHubConnection.Text, txtHubProxyName.Text, txtApplicationName.Text, instanceId, new TimeSpan(0, 0, 5), 
-            //    UpdateSettingApplication =>
-            //  {
-            //      Console.WriteLine($"{instanceId}, Date: { DateTime.Now:dd/MM/yyyy HH:mm:ss}, Item: { JsonConvert.SerializeObject(settingsTestClass)}");
-            //      dgvUpdates.Rows.Add(instanceId, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), JsonConvert.SerializeObject(settingsTestClass));
+            SettingManager.Instance.StartConnectionSettingsManager(txtUrlHubConnection.Text, txtHubProxyName.Text, txtApplicationName.Text, instanceId, ref dgvUpdates);
 
-            //  },
-            //  InitSettingApplication =>
-            //  {
-            //      Console.WriteLine($"{instanceId}, Date: { DateTime.Now:dd/MM/yyyy HH:mm:ss}, Item: { JsonConvert.SerializeObject(settingsTestClass)}");
-            //      dgvUpdates.Rows.Add(instanceId, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), JsonConvert.SerializeObject(settingsTestClass));
-              
-            //  });
         }
 
 

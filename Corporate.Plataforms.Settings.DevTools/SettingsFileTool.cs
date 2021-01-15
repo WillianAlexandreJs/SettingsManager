@@ -15,7 +15,7 @@ namespace Corporate.Plataforms.Settings.DevTools
         private readonly string _applicationName;
         private string _folderPath;
         readonly Dictionary<string, XmlDocument> _configFiles = new Dictionary<string, XmlDocument>();
-        readonly List<PropertyData> lstPropertyData = new List<PropertyData>();
+        readonly List<PropertyDetails> lstPropertyData = new List<PropertyDetails>();
 
         public SettingsFileTool(string applicationName, string folderPath, string extension)
         {
@@ -35,7 +35,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             }
         }
 
-        public List<PropertyData> GetProperties()
+        public List<PropertyDetails> GetProperties()
         {
             foreach (var file in _configFiles)
             {
@@ -55,9 +55,9 @@ namespace Corporate.Plataforms.Settings.DevTools
 
         }
 
-        private List<PropertyData> ReadSections(string instance, XmlDocument xmlDocument)
+        private List<PropertyDetails> ReadSections(string instance, XmlDocument xmlDocument)
         {
-            List<PropertyData> lstPropertyData = new List<PropertyData>();
+            List<PropertyDetails> lstPropertyData = new List<PropertyDetails>();
 
             XmlNode configSectionsNode = FindNode(xmlDocument.DocumentElement.ChildNodes, "configSections");
 
@@ -84,9 +84,9 @@ namespace Corporate.Plataforms.Settings.DevTools
             return lstPropertyData;
         }
 
-        private List<PropertyData> ReadAppSeetings(string instance, XmlDocument xmlDocument)
+        private List<PropertyDetails> ReadAppSeetings(string instance, XmlDocument xmlDocument)
         {
-            List<PropertyData> lstPropertyData = new List<PropertyData>();
+            List<PropertyDetails> lstPropertyData = new List<PropertyDetails>();
 
             XmlNode AppSeetingsNode = FindNode(xmlDocument.DocumentElement.ChildNodes, "AppSeetings");
 
@@ -281,7 +281,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             return null;
         }
 
-        private IEnumerable<PropertyData> GetSettingNameAndValueFromSettings(string instance, string sectionName, XmlNodeList list)
+        private IEnumerable<PropertyDetails> GetSettingNameAndValueFromSettings(string instance, string sectionName, XmlNodeList list)
         {
             XmlNode listProperties = FindNode(list, sectionName);
 
@@ -289,7 +289,7 @@ namespace Corporate.Plataforms.Settings.DevTools
             {
                 if (node.Attributes != null  && node.Attributes.Count > 0)
                 {
-                    yield return new PropertyData
+                    yield return new PropertyDetails
                     {
                         Instance = instance,
                         Reference = sectionName,

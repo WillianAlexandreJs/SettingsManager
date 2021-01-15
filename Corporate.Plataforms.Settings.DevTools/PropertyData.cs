@@ -1,8 +1,8 @@
 ﻿namespace Corporate.Plataforms.Settings.DevTools
 {
-    public class PropertyData
+    public class PropertyDetails
     {
-        public PropertyData()
+        public PropertyDetails()
         {
             ReferenceType = EReferenceType.Setting;
         }

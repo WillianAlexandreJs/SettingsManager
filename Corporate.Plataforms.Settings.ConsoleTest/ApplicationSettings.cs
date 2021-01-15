@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace ConsoleApp1
+namespace Corporate.Plataforms.Settings.ConsoleTest
 { 
     public class ApplicationSettings
     {
@@ -19,9 +19,24 @@ namespace ConsoleApp1
             }
         }
 
+        public ApplicationSettings()
+        {
+            ChildApplicationSettings = new ChildApplicationSettings();
+        }
+
         public string FirstStringProperty { get; set; }
         public string SecondStringProperty { get; set; }
         public int FirstIntProperty { get; set; }
         public int SecondIntProperty { get; set; }
+        public ChildApplicationSettings ChildApplicationSettings { get; set; }
+    }
+
+    public class ChildApplicationSettings
+    {
+
+        public string ChildFirstStringProperty { get; set; }
+        public string ChildSecondStringProperty { get; set; }
+        public int ChildFirstIntProperty { get; set; }
+        public int ChildSecondIntProperty { get; set; }
     }
 }

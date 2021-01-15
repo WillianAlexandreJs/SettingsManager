@@ -16,11 +16,12 @@ namespace Corporate.Plataforms.Settings.Client
     {
         #region Properties
 
+        private HubConnection _hubConnection;
+        protected LoggerManager loggerManager { get; private set; }
+
         protected T Configuration { get; set; }
         protected string ApplicationId { get; private set; }
         protected string ConnectionId { get; private set; }
-        protected HubConnection _hubConnection;
-        protected LoggerManager loggerManager;
 
         #endregion
 
@@ -34,6 +35,11 @@ namespace Corporate.Plataforms.Settings.Client
         public string GetConnectionId()
         {
             return _hubConnection.ConnectionId;
+        }
+
+        public string GetConnectionState()
+        {
+            return _hubConnection.State.ToString();
         }
 
         #endregion
@@ -56,14 +62,14 @@ namespace Corporate.Plataforms.Settings.Client
         {
             try
             {
-                Thread.Sleep(TimeSpan.FromSeconds(100));
+                Thread.Sleep(TimeSpan.FromSeconds(20));
 
                 _hubConnection = new HubConnectionBuilder()
                   .WithUrl(new Uri(new Uri(hubConnectionUrl), hubProxyName), options =>
                   {
                       options.AccessTokenProvider = () => Task.FromResult(GenerateToken(applicationName, applicationId));
                   })
-                  .WithAutomaticReconnect()
+                  .WithAutomaticReconnect(new TimeSpan[] { TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30), TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(5)})
                   .Build();
 
                 _hubConnection.StartAsync()
@@ -76,9 +82,9 @@ namespace Corporate.Plataforms.Settings.Client
                         else
                         {
                             _hubConnection.KeepAliveInterval = keepAliveInterval;
-                            _hubConnection.On("Closed", HubConnection_Closed);
-                            _hubConnection.On("Reconnecting", HubConnection_Reconnecting);
-                            _hubConnection.On("Reconnected", HubConnection_ReconnectedAsync);
+                            _hubConnection.Closed += HubConnection_Closed;
+                            _hubConnection.Reconnecting += HubConnection_Reconnecting;
+                            _hubConnection.Reconnected += HubConnection_Reconnected;
                             _hubConnection.On<PropertyData>("UpdateInstanceSettings", UpdateSettingApplication);
                             _hubConnection.InvokeAsync<List<PropertyData>>("GetInstanceSettings", applicationId)
                             .ContinueWith(InitSettings =>
@@ -139,20 +145,20 @@ namespace Corporate.Plataforms.Settings.Client
 
         #region Events
 
-        protected virtual async void HubConnection_Closed()
+        protected virtual async Task HubConnection_Closed(Exception exception)
         {
-            Console.WriteLine($"_hubConnection_Closed New State: {_hubConnection.State} {_hubConnection.ConnectionId}");
+            Console.WriteLine($"_hubConnection_Closed New State: {_hubConnection.State} {_hubConnection.ConnectionId} {exception.Message}");
         }
 
-        protected virtual async void HubConnection_Reconnecting()
+        protected virtual async Task HubConnection_Reconnecting(Exception exception)
         {
             Console.WriteLine($"_hubConnection_Reconnecting New State: {_hubConnection.State} {_hubConnection.ConnectionId}");
             
         }
 
-        protected virtual async void HubConnection_ReconnectedAsync()
+        protected virtual async Task HubConnection_Reconnected(string connectionId)
         {
-            ConnectionId = _hubConnection.ConnectionId;
+            ConnectionId = connectionId;
             InitSettingApplication(await _hubConnection.InvokeAsync<List<PropertyData>>("GetInstanceSettings", ApplicationId));
         }
 
