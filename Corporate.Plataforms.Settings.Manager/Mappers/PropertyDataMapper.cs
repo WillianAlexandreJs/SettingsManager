@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Corporate.Plataforms.Settings.Manager.Entities;
-using Corporate.Plataforms.Settings.Manager.Models;
+using Corporate.Plataforms.Settings.Model;
 
 namespace Corporate.Plataforms.Settings.Manager.Mappers
 {

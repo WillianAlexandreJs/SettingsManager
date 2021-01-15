@@ -287,14 +287,14 @@ namespace Corporate.Plataforms.Settings.DevTools
 
             foreach (XmlNode node in listProperties.ChildNodes)
             {
-                if (node.Attributes.Count > 0)
+                if (node.Attributes != null  && node.Attributes.Count > 0)
                 {
                     yield return new PropertyData
                     {
                         Instance = instance,
                         Reference = sectionName,
-                        Property = node.Attributes.GetNamedItem("name").Value,
-                        Type = node.Attributes.GetNamedItem("serializeAs").Value,
+                        Property = node.Attributes.GetNamedItem("name")?.Value,
+                        Type = node.Attributes.GetNamedItem("serializeAs")?.Value,
                         Value = node.InnerText
                     };
                 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 
 namespace Corporate.Plataforms.Settings.Manager.Datas
@@ -28,13 +28,13 @@ namespace Corporate.Plataforms.Settings.Manager.Datas
 
         public List<PropertyDataEntity> ListPropertiesData()
         {
-            return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES",
-                new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = DBNull.Value }).ToList();
+            return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES @INSTANCE_NAME",
+    new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = DBNull.Value }).ToList();
         }
 
         public List<PropertyDataEntity> GetInstancePropertiesData(string instanceName)
         {
-            return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES",
+           return _context.GetPropertiesData.FromSqlRaw("GET_INSTANCE_PROPERTY_VALUES @INSTANCE_NAME",
                 new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = instanceName }).ToList();
         }
 
@@ -42,7 +42,7 @@ namespace Corporate.Plataforms.Settings.Manager.Datas
         {
             var propertyIdParameter = new SqlParameter("@PROPERTY_ID", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-            return _context.GetTransactionCommandResult.FromSqlRaw("UPDATE_INSTANCE_PROPERTY_VALUE",
+            return _context.GetTransactionCommandResult.FromSqlRaw("UPDATE_INSTANCE_PROPERTY_VALUE @INSTANCE_NAME, @PROPERTY_NAME, @SETTING_REFERENCE, @PROPERTY_VALUE, @PROPERTY_ID",
                         new SqlParameter("@INSTANCE_NAME", SqlDbType.VarChar) { Value = instanceName },
                         new SqlParameter("@PROPERTY_NAME", SqlDbType.VarChar) { Value = propertyData.PropertyName },
                         new SqlParameter("@SETTING_REFERENCE", SqlDbType.VarChar) { Value = propertyData.SettingReference },

@@ -2,6 +2,7 @@
 using Corporate.Plataforms.Settings.Manager.Business.Interfaces;
 using Corporate.Plataforms.Settings.Manager.Interfaces;
 using Corporate.Plataforms.Settings.Manager.Models;
+using Corporate.Plataforms.Settings.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -15,9 +16,9 @@ namespace Corporate.Plataforms.Settings.Manager
     {
         private readonly ISettingsManagerBusiness _settingsManagerBusiness;
 
-        public SettingsHubClient()
+        public SettingsHubClient(ISettingsManagerBusiness settingsManagerBusiness)
         {
-            
+            _settingsManagerBusiness = settingsManagerBusiness;
         }
 
         public override async Task OnConnectedAsync()
@@ -32,7 +33,11 @@ namespace Corporate.Plataforms.Settings.Manager
             await base.OnDisconnectedAsync(exception);
         }
 
-       
+        public Task<List<PropertyData>> GetInstanceSettings(string instanceName)
+        {
+            return _settingsManagerBusiness.GetInstanceSettings(instanceName);
+        }
+
     }
 }
 

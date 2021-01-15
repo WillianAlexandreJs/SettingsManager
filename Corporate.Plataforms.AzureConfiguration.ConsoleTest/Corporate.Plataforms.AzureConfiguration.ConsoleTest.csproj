@@ -105,5 +105,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Corporate.Plataforms.AzureConfiguration.Client\Corporate.Plataforms.AzureConfiguration.Client.csproj">
+      <Project>{EE173DF3-9804-4E09-9ED2-1D10718431E8}</Project>
+      <Name>Corporate.Plataforms.AzureConfiguration.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,6 @@
 ﻿using Corporate.Plataforms.Settings.Manager.Models;
+using Corporate.Plataforms.Settings.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Corporate.Plataforms.Settings.Manager.Business.Interfaces
@@ -7,7 +9,7 @@ namespace Corporate.Plataforms.Settings.Manager.Business.Interfaces
     {
         Task UpdatePropertyValue(string instanceName, PropertyDataUpdate propertyValue);
 
-        Task SendInstanceSettings(string instanceName);
+        Task<List<PropertyData>> GetInstanceSettings(string instanceName);
 
     }
 }

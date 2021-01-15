@@ -36,14 +36,14 @@
             this.txtApplicationName = new System.Windows.Forms.TextBox();
             this.lblApplicationName = new System.Windows.Forms.Label();
             this.dgvSettings = new System.Windows.Forms.DataGridView();
-            this.btnClasses = new System.Windows.Forms.Button();
-            this.btnInserts = new System.Windows.Forms.Button();
             this.Instance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReferenceType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnClasses = new System.Windows.Forms.Button();
+            this.btnInserts = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +62,6 @@
             this.txtPathConfigFile.Name = "txtPathConfigFile";
             this.txtPathConfigFile.Size = new System.Drawing.Size(353, 22);
             this.txtPathConfigFile.TabIndex = 1;
-            this.txtPathConfigFile.Text = "C:\\Lixo\\FilesConfig\\Nd.Notification";
             // 
             // btnReadFiles
             // 
@@ -88,7 +87,6 @@
             this.cbExtension.Name = "cbExtension";
             this.cbExtension.Size = new System.Drawing.Size(140, 24);
             this.cbExtension.TabIndex = 4;
-            this.cbExtension.SelectedIndex = 0;
             // 
             // lblExtension
             // 
@@ -105,7 +103,6 @@
             this.txtApplicationName.Name = "txtApplicationName";
             this.txtApplicationName.Size = new System.Drawing.Size(353, 22);
             this.txtApplicationName.TabIndex = 7;
-            this.txtApplicationName.Text = "Nd.Notification";
             // 
             // lblApplicationName
             // 
@@ -139,28 +136,6 @@
             this.dgvSettings.TabIndex = 8;
             this.dgvSettings.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSettings_CellEndEdit);
             this.dgvSettings.CurrentCellDirtyStateChanged += new System.EventHandler(this.DgvSettings_CurrentCellDirtyStateChanged);
-            // 
-            // btnClasses
-            // 
-            this.btnClasses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClasses.Location = new System.Drawing.Point(13, 465);
-            this.btnClasses.Name = "btnClasses";
-            this.btnClasses.Size = new System.Drawing.Size(122, 35);
-            this.btnClasses.TabIndex = 9;
-            this.btnClasses.Text = "Create Classes";
-            this.btnClasses.UseVisualStyleBackColor = true;
-            this.btnClasses.Click += new System.EventHandler(this.BtnClasses_Click);
-            // 
-            // btnInserts
-            // 
-            this.btnInserts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInserts.Location = new System.Drawing.Point(147, 466);
-            this.btnInserts.Name = "btnInserts";
-            this.btnInserts.Size = new System.Drawing.Size(122, 35);
-            this.btnInserts.TabIndex = 10;
-            this.btnInserts.Text = "Create Inserts";
-            this.btnInserts.UseVisualStyleBackColor = true;
-            this.btnInserts.Click += new System.EventHandler(this.BtnInserts_Click);
             // 
             // Instance
             // 
@@ -216,7 +191,29 @@
             this.Value.Name = "Value";
             this.Value.ReadOnly = true;
             // 
-            // frmCreateConfigArtefacts
+            // btnClasses
+            // 
+            this.btnClasses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClasses.Location = new System.Drawing.Point(13, 465);
+            this.btnClasses.Name = "btnClasses";
+            this.btnClasses.Size = new System.Drawing.Size(122, 35);
+            this.btnClasses.TabIndex = 9;
+            this.btnClasses.Text = "Create Classes";
+            this.btnClasses.UseVisualStyleBackColor = true;
+            this.btnClasses.Click += new System.EventHandler(this.BtnClasses_Click);
+            // 
+            // btnInserts
+            // 
+            this.btnInserts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInserts.Location = new System.Drawing.Point(147, 466);
+            this.btnInserts.Name = "btnInserts";
+            this.btnInserts.Size = new System.Drawing.Size(122, 35);
+            this.btnInserts.TabIndex = 10;
+            this.btnInserts.Text = "Create Inserts";
+            this.btnInserts.UseVisualStyleBackColor = true;
+            this.btnInserts.Click += new System.EventHandler(this.BtnInserts_Click);
+            // 
+            // FrmCreateConfigArtefacts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +228,7 @@
             this.Controls.Add(this.btnReadFiles);
             this.Controls.Add(this.txtPathConfigFile);
             this.Controls.Add(this.lblPathConfigFiles);
-            this.Name = "frmCreateConfigArtefacts";
+            this.Name = "FrmCreateConfigArtefacts";
             this.Text = "Create Config Artefacts";
             ((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).EndInit();
             this.ResumeLayout(false);

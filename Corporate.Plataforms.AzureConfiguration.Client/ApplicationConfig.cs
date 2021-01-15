@@ -1,47 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+using System;
+using System.Threading.Tasks;
 
 namespace Corporate.Plataforms.AzureConfiguration.Client
 {
-    public class ApplicationConfig
+
+    public class ApplicationConfig<T>
     {
         private static IConfiguration _configuration = null;
         private static IConfigurationRefresher _refresher = null;
 
-        public ApplicationConfig()
+        public ApplicationConfig(T section)
         {
-            var builder = new ConfigurationBuilder();
-            builder.AddAzureAppConfiguration(options =>
+            _configuration = new ConfigurationBuilder()
+            .AddAzureAppConfiguration(options =>
             {
-                options.Connect(Environment.GetEnvironmentVariable("ConnectionString"))
+                options.Connect("Endpoint=https://willappconfiguration.azconfig.io;Id=d9NT-le-s0:+orCiChlZOihEcAltWYt;Secret=/zodEns9xWs7Mejy3V0+SV05AJJNHPz7R4sBT0vRtFo=")
+                .TrimKeyPrefix("TesteApp")
                         .ConfigureRefresh(refresh =>
                         {
-                            refresh.Register("TestApp:Settings:Message")
-                                .SetCacheExpiration(TimeSpan.FromSeconds(10));
+                            refresh.Register(key: "TesteApp:*", refreshAll: true).SetCacheExpiration(TimeSpan.FromSeconds(10));
                         });
 
                 _refresher = options.GetRefresher();
-            });
+            }).Build();
 
-            _configuration = builder.Build();
-            PrintMessage().Wait();
+            PrintMessage(section).Wait();
         }
 
 
-        private static async Task PrintMessage()
+        private static async Task PrintMessage(T section)
         {
-            Console.WriteLine(_configuration["TestApp:Settings:Message"] ?? "Hello world!");
+            Console.WriteLine(_configuration["XPApplication"] ?? "Empty");
+            var teste = _configuration.GetSection(typeof(T).Name);
 
             // Wait for the user to press Enter
-            Console.ReadLine();
+              Console.ReadLine();
 
             await _refresher.TryRefreshAsync();
-            Console.WriteLine(_configuration["TestApp:Settings:Message"] ?? "Hello world!");
+            Console.WriteLine(_configuration["XPApplication"] ?? "Empty");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
         }
 
         [HttpPost]
-        public string UpdateGeneralPropertyValue([FromBody] PropertyValue propertyValue)
+        public string UpdateGeneralPropertyData([FromBody] PropertyData propertyValue)
         {
             string retMessage;
             try
@@ -43,7 +43,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
         }
 
         [HttpPost]
-        public string UpdateApplicationPropertyValue([FromQuery] string applicationName, [FromBody] PropertyValue propertyValue)
+        public string UpdateApplicationPropertyData([FromQuery] string applicationName, [FromBody] PropertyData propertyValue)
         {
             string retMessage;
             try
@@ -60,7 +60,7 @@ namespace Corporate.Plataforms.Settings.Manager.Controllers
         }
 
         [HttpPost]
-        public string UpdateInstancePropertyValue([FromQuery] string instanceId, [FromBody] PropertyValue propertyValue)
+        public string UpdateInstancePropertyData([FromQuery] string instanceId, [FromBody] PropertyData propertyValue)
         {
             string retMessage;
             try

@@ -48,7 +48,7 @@ namespace Corporate.Plataforms.Settings.Manager
                 opcoes.Providers.Add<GzipCompressionProvider>();
             });
 
-            //SignalR with Redis
+            //SignalR with out Redis
             services.AddSignalR();
 
             //SignalR with Redis

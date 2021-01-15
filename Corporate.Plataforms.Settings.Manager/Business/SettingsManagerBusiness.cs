@@ -45,14 +45,10 @@ namespace Corporate.Plataforms.Settings.Manager.Business
 
         }
 
-        public async Task SendInstanceSettings(string instanceName)
+        public async Task<List<PropertyData>> GetInstanceSettings(string instanceName)
         {
-            List<PropertyData> properties = GetCacheIsNullRaizeSync<List<PropertyData>, List<PropertyDataEntity>>(
-                                                instanceName, 
-                                                () => _settingsData.GetInstancePropertiesData(instanceName)
-                                            );
+            return await Task.FromResult(GetCacheIsNullRaizeSync<List<PropertyData>, List<PropertyDataEntity>>(instanceName, () => _settingsData.GetInstancePropertiesData(instanceName)));
 
-            await _settingsHubContext.Clients.User(instanceName).SendAsync("GetInstanceSettings", properties);
         }
 
         private T GetCacheIsNullRaizeSync<T, TEntity>(string instanceName, Func<TEntity> actionGetDados)

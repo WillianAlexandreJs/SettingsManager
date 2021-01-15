@@ -1,12 +1,13 @@
 ﻿using Corporate.Plataforms.Settings.Model;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Corporate.Plataforms.Settings.Client
@@ -15,7 +16,9 @@ namespace Corporate.Plataforms.Settings.Client
     {
         #region Properties
 
-        public T _configuration { get; private set; }
+        protected T Configuration { get; set; }
+        protected string ApplicationId { get; private set; }
+        protected string ConnectionId { get; private set; }
         protected HubConnection _hubConnection;
         protected LoggerManager loggerManager;
 
@@ -35,35 +38,26 @@ namespace Corporate.Plataforms.Settings.Client
 
         #endregion
 
-        public ApplicationConfigHub(T configuration)
-        {
-            _configuration = configuration;
-        }
-
         public void StartHubConnection()
         {
             StartHub(HubConnectionConfig.Settings.HubConnectionUrl,
                      HubConnectionConfig.Settings.HubProxyName,
                      HubConnectionConfig.Settings.ApplicationName,
                      HubConnectionConfig.Settings.ApplicationId,
-                     HubConnectionConfig.Settings.KeepAliveInterval,
-                     UpdateSettingApplication);
+                     HubConnectionConfig.Settings.KeepAliveInterval);
         }
 
         public void StartHubConnection(string hubConnectionUrl, string hubProxyName, string applicationName, string applicationId, TimeSpan keepAliveInterval)
         {
-            StartHub(hubConnectionUrl, hubProxyName, applicationName, applicationId, keepAliveInterval, UpdateSettingApplication);
+            StartHub(hubConnectionUrl, hubProxyName, applicationName, applicationId, keepAliveInterval);
         }
 
-        public void StartHubConnection(string hubConnectionUrl, string hubProxyName, string applicationName, string applicationId, TimeSpan keepAliveInterval, Action<PropertyValue> updateSettingApplication)
-        {
-            StartHub(hubConnectionUrl, hubProxyName, applicationName, applicationId, keepAliveInterval, updateSettingApplication);
-        }
-
-        private void StartHub(string hubConnectionUrl, string hubProxyName, string applicationName, string applicationId, TimeSpan keepAliveInterval, Action<PropertyValue> actionUpdateSettingApplication)
+        private void StartHub(string hubConnectionUrl, string hubProxyName, string applicationName, string applicationId, TimeSpan keepAliveInterval)
         {
             try
             {
+                Thread.Sleep(TimeSpan.FromSeconds(100));
+
                 _hubConnection = new HubConnectionBuilder()
                   .WithUrl(new Uri(new Uri(hubConnectionUrl), hubProxyName), options =>
                   {
@@ -81,15 +75,30 @@ namespace Corporate.Plataforms.Settings.Client
                         }
                         else
                         {
+                            _hubConnection.KeepAliveInterval = keepAliveInterval;
                             _hubConnection.On("Closed", HubConnection_Closed);
                             _hubConnection.On("Reconnecting", HubConnection_Reconnecting);
-                            _hubConnection.On("Reconnected", HubConnection_Reconnected);
-                            _hubConnection.KeepAliveInterval = keepAliveInterval;
-                            _hubConnection.On<PropertyValue>("UpdateInstanceSettings", actionUpdateSettingApplication);
+                            _hubConnection.On("Reconnected", HubConnection_ReconnectedAsync);
+                            _hubConnection.On<PropertyData>("UpdateInstanceSettings", UpdateSettingApplication);
+                            _hubConnection.InvokeAsync<List<PropertyData>>("GetInstanceSettings", applicationId)
+                            .ContinueWith(InitSettings =>
+                            {
+                                if (task.IsFaulted)
+                                {
+                                    Console.WriteLine("There was an error opening the connection:{0}", task.Exception.GetBaseException());
+                                }
+                                else
+                                {
+                                    InitSettingApplication(InitSettings.Result);
+                                }
 
+                            }).Wait();
                         }
-                    })
-                    .Wait();
+
+                    }).Wait();
+
+                ApplicationId = applicationId;
+                ConnectionId = _hubConnection.ConnectionId;
             }
             catch (Exception ex)
             {
@@ -130,35 +139,85 @@ namespace Corporate.Plataforms.Settings.Client
 
         #region Events
 
-        protected virtual void HubConnection_Closed()
+        protected virtual async void HubConnection_Closed()
         {
-            Console.WriteLine("_hubConnection_Closed New State:" + _hubConnection.State + " " + _hubConnection.ConnectionId);
+            Console.WriteLine($"_hubConnection_Closed New State: {_hubConnection.State} {_hubConnection.ConnectionId}");
         }
 
-        protected virtual void HubConnection_Reconnecting()
+        protected virtual async void HubConnection_Reconnecting()
         {
-            Console.WriteLine("_hubConnection_Reconnecting New State:" + _hubConnection.State + " " + _hubConnection.ConnectionId);
+            Console.WriteLine($"_hubConnection_Reconnecting New State: {_hubConnection.State} {_hubConnection.ConnectionId}");
+            
         }
 
-        protected virtual void HubConnection_Reconnected()
+        protected virtual async void HubConnection_ReconnectedAsync()
         {
-            Console.WriteLine("_hubConnection_Reconnected New State:" + _hubConnection.State + " " + _hubConnection.ConnectionId);
+            ConnectionId = _hubConnection.ConnectionId;
+            InitSettingApplication(await _hubConnection.InvokeAsync<List<PropertyData>>("GetInstanceSettings", ApplicationId));
         }
 
-        public void UpdateSettingApplication(PropertyValue itemConfig)
+        #endregion
+
+        #region "Privete Methods"
+
+        protected virtual void InitSettingApplication(List<PropertyData> settings)
         {
             try
             {
-                PropertyInfo propertyInfo = _configuration.GetType().GetProperty(itemConfig.Nome);
-                if (propertyInfo != null)
-                    propertyInfo.SetValue(_configuration, Convert.ChangeType(itemConfig.Valor, propertyInfo.PropertyType), null);
-                else
-                    Console.WriteLine($"Propriedade {itemConfig.Nome} não encontrada");
+                foreach (var itemConfig in settings)
+                {
+                    UpdateSettingApplication(itemConfig);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+        }
+
+        protected virtual void UpdateSettingApplication(PropertyData itemConfig)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(itemConfig.SettingReference))
+                {
+                    object nestedProperty = Configuration.GetType().GetProperty(itemConfig.SettingReference).GetValue(Configuration);
+
+                    if (nestedProperty == null)
+                    {
+                        Console.WriteLine($"Referencia {itemConfig.PropertyName} não encontrada");
+                        return;
+                    }
+
+                    UpdatePropertyValue(nestedProperty, itemConfig);
+                }
+                else
+                {
+                    UpdatePropertyValue(Configuration, itemConfig);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        protected virtual void UpdatePropertyValue(object obj, PropertyData itemConfig)
+        {
+            PropertyInfo propertyInfo;
+            propertyInfo = obj.GetType().GetProperty(itemConfig.PropertyName);
+
+            if (propertyInfo == null)
+            {
+                Console.WriteLine($"Propriedade {itemConfig.PropertyName} não encontrada");
+                return;
+            }
+            
+            if(propertyInfo.GetValue(obj)?.ToString() != itemConfig.PropertyValue)
+                propertyInfo.SetValue(obj, Convert.ChangeType(itemConfig.PropertyValue, propertyInfo.PropertyType), null);
+                
         }
 
         #endregion
