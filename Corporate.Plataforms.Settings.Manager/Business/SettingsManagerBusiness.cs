@@ -4,6 +4,7 @@ using Corporate.Plataforms.Settings.Manager.Business.Interfaces;
 using Corporate.Plataforms.Settings.Manager.Datas.Interfaces;
 using Corporate.Plataforms.Settings.Manager.Entities;
 using Corporate.Plataforms.Settings.Manager.Models;
+using Corporate.Plataforms.Settings.Manager.Services.Interfaces;
 using Corporate.Plataforms.Settings.Model;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -20,16 +21,19 @@ namespace Corporate.Plataforms.Settings.Manager.Business
         private readonly IHubContext<SettingsHubClient> _settingsHubContext;
         private readonly IDistributedCacheRepository _distributedCache;
         private readonly ISettingsDataRepository _settingsData;
+        private readonly IAppConfigurationService _appConfigurationBusiness;
         private readonly IMapper _mapper;
 
         public SettingsManagerBusiness(IHubContext<SettingsHubClient> settingsHubContext, 
                                         IDistributedCacheRepository distributedCache, 
-                                        ISettingsDataRepository settingsData, 
+                                        ISettingsDataRepository settingsData,
+                                        IAppConfigurationService appConfigurationBusiness,
                                         IMapper mapper)
         {
             _settingsHubContext = settingsHubContext;
             _distributedCache = distributedCache;
             _settingsData = settingsData;
+            _appConfigurationBusiness = appConfigurationBusiness;
             _mapper = mapper;
         }
 
@@ -47,16 +51,28 @@ namespace Corporate.Plataforms.Settings.Manager.Business
 
         public async Task<List<PropertyData>> GetInstanceSettings(string instanceName)
         {
-            return await Task.FromResult(GetCacheIsNullRaizeSync<List<PropertyData>, List<PropertyDataEntity>>(instanceName, () => _settingsData.GetInstancePropertiesData(instanceName)));
-
+            return await GetCacheIsNullRaizeSync<List<PropertyData>>(instanceName, () => GetInstanceSettingsDb(instanceName) );
         }
 
-        private T GetCacheIsNullRaizeSync<T, TEntity>(string instanceName, Func<TEntity> actionGetDados)
+        public async Task<List<PropertyData>> GetInstanceSettingsDb(string instanceName)
+        {
+            var propertiesDataEntity =  _settingsData.GetInstancePropertiesData(instanceName);
+            List<PropertyData> properties = _mapper.Map<List<PropertyData>>(propertiesDataEntity);
+
+            foreach (var property in properties.Where(x => x.PropertyType.Equals("AppConfigurationValue")))
+            {
+                property.PropertyValue = await _appConfigurationBusiness.GetKeyValue(property.PropertyName, property.InstanceName);
+            }
+
+            return properties;
+        }
+
+        private  async Task<T> GetCacheIsNullRaizeSync<T>(string instanceName, Func<Task<T>> actionGetDados)
         {
             T data = _distributedCache.GetCache<T>(instanceName);
 
             if (data is null)
-                data = _mapper.Map<T>(actionGetDados.Invoke());
+                data = await actionGetDados.Invoke();
 
             //if (!(properties is null) || properties.Any()) 
             //Invoke IBackGroundWoker Update Cache

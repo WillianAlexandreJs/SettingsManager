@@ -4,15 +4,17 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Corporate.Plataforms.Settings.Client
 {
-    public class ApplicationConfigHub<T>
+    public class ApplicationConfigHub<T> : IDisposable
     {
         #region Properties
 
@@ -62,14 +64,12 @@ namespace Corporate.Plataforms.Settings.Client
         {
             try
             {
-                Thread.Sleep(TimeSpan.FromSeconds(20));
-
                 _hubConnection = new HubConnectionBuilder()
                   .WithUrl(new Uri(new Uri(hubConnectionUrl), hubProxyName), options =>
                   {
                       options.AccessTokenProvider = () => Task.FromResult(GenerateToken(applicationName, applicationId));
                   })
-                  .WithAutomaticReconnect(new TimeSpan[] { TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30), TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(5)})
+                  .WithAutomaticReconnect(new TimeSpan[] { TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30), TimeSpan.FromMinutes(1), TimeSpan.FromSeconds(5) })
                   .Build();
 
                 _hubConnection.StartAsync()
@@ -77,7 +77,7 @@ namespace Corporate.Plataforms.Settings.Client
                     {
                         if (task.IsFaulted)
                         {
-                            Console.WriteLine("There was an error opening the connection:{0}", task.Exception.GetBaseException());
+                            GetLocalSettings(task.Exception.GetBaseException());
                         }
                         else
                         {
@@ -91,7 +91,7 @@ namespace Corporate.Plataforms.Settings.Client
                             {
                                 if (task.IsFaulted)
                                 {
-                                    Console.WriteLine("There was an error opening the connection:{0}", task.Exception.GetBaseException());
+                                    GetLocalSettings(task.Exception.GetBaseException());
                                 }
                                 else
                                 {
@@ -100,7 +100,6 @@ namespace Corporate.Plataforms.Settings.Client
 
                             }).Wait();
                         }
-
                     }).Wait();
 
                 ApplicationId = applicationId;
@@ -153,7 +152,7 @@ namespace Corporate.Plataforms.Settings.Client
         protected virtual async Task HubConnection_Reconnecting(Exception exception)
         {
             Console.WriteLine($"_hubConnection_Reconnecting New State: {_hubConnection.State} {_hubConnection.ConnectionId}");
-            
+
         }
 
         protected virtual async Task HubConnection_Reconnected(string connectionId)
@@ -164,7 +163,7 @@ namespace Corporate.Plataforms.Settings.Client
 
         #endregion
 
-        #region "Privete Methods"
+        #region "Protected virtual Methods"
 
         protected virtual void InitSettingApplication(List<PropertyData> settings)
         {
@@ -220,19 +219,44 @@ namespace Corporate.Plataforms.Settings.Client
                 Console.WriteLine($"Propriedade {itemConfig.PropertyName} não encontrada");
                 return;
             }
-            
-            if(propertyInfo.GetValue(obj)?.ToString() != itemConfig.PropertyValue)
+
+            if (propertyInfo.GetValue(obj)?.ToString() != itemConfig.PropertyValue)
                 propertyInfo.SetValue(obj, Convert.ChangeType(itemConfig.PropertyValue, propertyInfo.PropertyType), null);
-                
+
         }
 
         #endregion
 
+        #region "private Methods"
 
+        private void GetLocalSettings(Exception ex)
+        {
+            if (!File.Exists(GetFileName()))
+                return;
 
+            Configuration = JsonConvert.DeserializeObject<T>(File.ReadAllText(GetFileName()));
+            Console.WriteLine("There was an error opening the connection:{0}", ex);
+        }
 
+        private void CreateSettingBackup()
+        {
+            if (File.Exists(GetFileName()))
+                File.Delete(GetFileName());
 
+            File.WriteAllText(GetFileName(), JsonConvert.SerializeObject(Configuration));
+        }
 
+        private string GetFileName()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"settings.json");
+        }
+
+        public void Dispose()
+        {
+            CreateSettingBackup();
+        }
+
+        #endregion
 
     }
 }

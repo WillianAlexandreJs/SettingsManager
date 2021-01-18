@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Corporate.Plataforms.Settings.Manager.Business;
 using Corporate.Plataforms.Settings.Manager.Business.Interfaces;
+using Corporate.Plataforms.Settings.Manager.Services.Interfaces;
+using Corporate.Plataforms.Settings.Manager.Services;
 
 namespace Corporate.Plataforms.Settings.Manager
 {
@@ -62,6 +64,7 @@ namespace Corporate.Plataforms.Settings.Manager
 
             services.AddSingleton<IUserIdProvider, ApplicationIdProvider>();
             services.AddScoped<ISettingsManagerBusiness, SettingsManagerBusiness>();
+            services.AddScoped<IAppConfigurationService, AppConfigurationService>();
             services.AddScoped<ISettingsDataRepository, SettingsDataRepository>();
 
             services.ConfigureDistributedCacheRepository(Configuration);
